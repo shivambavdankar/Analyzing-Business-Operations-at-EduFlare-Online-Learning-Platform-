@@ -1,0 +1,35 @@
+NOSQL Implementation in MongoDB
+Four tables (Learners, Instructors, University, Courses) have been imported.
+
+The following queries were performed.
+
+Query 1: Updating Instructor ID-1005 degree
+to master’s from instructors table.
+db.instructor.update( {
+"instructor_id":1005},
+{$set: {"degree":"Master's"}
+});
+
+Query 2-Displays total price of course by category.
+db.course.aggregate(
+[{$group:{_id:"$category",
+total:{$sum:"$price"}}},
+{$sort:{total:1}}
+]);
+
+Query 3-Displays count of learners from each study domain
+db.learners.mapReduce(
+function() {
+emit(this.study_domain, {count: 1});
+},
+function(key, values) {
+var cnt = 0;
+values.forEach(function(value) {
+cnt += value.count;
+});
+return {count: cnt};
+},
+{
+out: {inline: 1}
+}
+).find()
