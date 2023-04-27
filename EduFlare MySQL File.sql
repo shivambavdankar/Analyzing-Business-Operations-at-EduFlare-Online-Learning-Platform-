@@ -45,8 +45,7 @@ WHERE i.instructor_id IN (SELECT c.instructor_id
                                          ON c.instructor_id = i.instructor_id
                                          WHERE c.course_no = 29 );
 
-#(>ANY) Find the names of learners who have enrolled in courses that have more than 2 learners enrolled in it.
-    
+#(>ANY) Find the names of learners who have enrolled in courses that have more than 2 learners enrolled in it.    
     SELECT DISTINCT learners.first_name, learners.last_name
 FROM learners
 JOIN enrollment ON learners.learner_id = enrollment.learner_id
