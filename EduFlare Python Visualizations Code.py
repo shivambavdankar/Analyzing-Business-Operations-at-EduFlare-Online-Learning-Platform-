@@ -49,9 +49,7 @@ df_student=dataframes['student']
 df_working_professionals=dataframes['working_professionals']
 print(df_Learners)
 
-
-#q1
-
+#1
 len_df_Learners = len(df_Learners)
 len_df_Student=len(df_student)
 len_df_Working_Professionals=len(df_working_professionals)
@@ -66,7 +64,8 @@ ax.axis('equal')
 ax.set_title('Number of Learners')
 plt.show()
 print(df_course)
-#q2
+
+#2
 # Create a bar plot of 'Course Name' vs 'Duration'
 df_course.plot.bar(x='course_name', y='duration_mins', rot=0)
 
@@ -80,7 +79,7 @@ plt.subplots_adjust(bottom=0.2)
 plt.show()
 
 
-#q3
+#3
 counts = df_instructor['degree'].value_counts()
 
 # create a new DataFrame with the unique values and their counts
@@ -95,46 +94,7 @@ plt.xlabel("Degree")
 plt.ylabel("No. of Instructors")
 plt.show()
 
-
-#q4
-uni_list = df_university.to_dict(orient='records')
-id_list = df_student['uni_id']
-
-# Print the resulting list of dictionaries
-print(uni_list)
-print(id_list)
-
-count_dict = {}
-for id in id_list:
-    count_dict[id] = count_dict.get(id, 0) + 1
-
-# Merge the two lists of dictionaries
-uni_dict_list = []
-for uni_dict in uni_list:
-    uni_id = uni_dict['uni_id']
-    uni_name = uni_dict['uni_name']
-    repeated_count = count_dict.get(uni_id, 0)
-    uni_dict_list.append({'uni_id': uni_id, 'uni_name': uni_name, 'repeated_count': repeated_count})
-
-# Create a pandas dataframe
-df = pd.DataFrame(uni_dict_list)
-
-# Print the resulting dataframe
-print(df)
-
-
-df.plot(x='uni_name', y='repeated_count', kind='line')
-
-# Set the title and axis labels
-plt.title("No. of Students from Different Universities")
-plt.xlabel("Universiy_Name")
-plt.ylabel("No.of Students")
-plt.xticks(rotation=90, ha='right')
-plt.subplots_adjust(bottom=0.2)
-# Show the plot
-plt.show()
-
-#q5
+#4
 df_instructor.plot(x='rating', y='age', kind='scatter')
 
 # Set the title and axis labels
